@@ -7,6 +7,7 @@
               <v-textarea label="Sms Content"></v-textarea>
               <v-btn v-on:click='smsSend'>Send</v-btn> 
           </v-form>
+          {{info}}
       </v-flex>
     </v-layout>
   </v-container>
@@ -16,12 +17,19 @@
     export default {
         name: 'SmsComposer',
         data: () => ({
-            valid: true
+            valid: true,
+            datetime: '2018-10-01 00:00:00',
+            info: 'info'
         }),
         methods: {
             smsSend: function (event) {
                 // `this` inside methods points to the Vue instance
-                alert('Hello ' + this.name + '!')
+                fetch('https://localhost:44391/api/Sms?fromDate=20%2F02%2F2019&toDate=22%2F02%2F2019', { mode: 'no-cors' })
+                    .then(response => response.json())
+                    .then(function (data) {
+                        this.info = data
+                        alert('bob')
+                    })
                 // `event` is the native DOM event
                 if (event) {
                     alert(event.target.tagName)

@@ -4,11 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessObjects;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using twilioService.Interfaces;
 
 namespace api.Controllers
 {
+    //[EnableCors()] //origins: "https://localhost:8080", headers: "*", methods: "*")]
     [Route("api/[controller]")]
     [ApiController]
     public class SmsController : ControllerBase

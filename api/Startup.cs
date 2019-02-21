@@ -44,6 +44,7 @@ namespace api
 
             // IOC settings (Instead of Unity, Ninject, Autofac etc)
             services.AddScoped<ITwilioService, TwilioService>();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +71,7 @@ namespace api
 
             app.UseHttpsRedirection();
             app.UseMvc();
-        }
+            app.UseCors(builder => builder.WithOrigins("https://localhost:8080"));
+         }
     }
 }

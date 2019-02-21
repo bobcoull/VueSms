@@ -12,7 +12,7 @@ import SmsComposer from '@/components/SmsComposer.vue'
 export default {
   name: 'Send',
   components: {
-    SmsComposer
+      SmsComposer
   }
 }
 </script>
