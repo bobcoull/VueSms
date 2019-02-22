@@ -8,7 +8,7 @@ namespace BusinessObjects
         [MaxLength(160, ErrorMessage = "Max length of message is 160 characters")]
         public string Message { get; set; }
 
-        [RegularExpression(@"^\+[0-9]{1,}$", ErrorMessage = "The Mobile No must be numeric")]
+        [RegularExpression(@"^\+[0-9]{1,}$", ErrorMessage = "The Mobile No must start with a + and be numeric")]
         [Required(ErrorMessage = "Mobile No can not be empty")]
         public string MobileNo { get; set; }
     }

@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessObjects;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using twilioService.Interfaces;
 
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace api.Controllers
 {
-    //[EnableCors()] //origins: "https://localhost:8080", headers: "*", methods: "*")]
     [Route("api/[controller]")]
-    [ApiController]
     public class SmsController : ControllerBase
     {
         private ITwilioService _twilioService;
@@ -38,7 +36,7 @@ namespace api.Controllers
 
             if (!DateTime.TryParse(fromDate, out fromDateParsed))
             {
-                response.ErrorMessages.Add(new ErrorMessage{ Message = $"From date {fromDate} is invalid" });
+                response.ErrorMessages.Add(new ErrorMessage { Message = $"From date {fromDate} is invalid" });
             }
 
             if (!DateTime.TryParse(toDate, out toDateParsed))
@@ -71,7 +69,7 @@ namespace api.Controllers
         public IActionResult Post([FromBody] SendMessageRequest sendMessageRequest)
         {
             SendMessageResponse response = new SendMessageResponse();
-            
+
             if (!ModelState.IsValid)
             {
                 // validation errors have occurred

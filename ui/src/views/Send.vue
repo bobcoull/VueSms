@@ -1,6 +1,6 @@
 <template>
   <div class="sms-send">
-    <h1>This is the sms send page</h1>
+    <h1>sms send</h1>
     <SmsComposer />
   </div>
 </template>
