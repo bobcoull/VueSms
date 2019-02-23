@@ -2,12 +2,12 @@
   <v-container class="sms-list">
     <v-layout row wrap>
       <v-flex xs12>
-        <v-menu bottom left>
+        <v-menu>
           <v-text-field slot="activator" label="From Date" prepend-icon="date_range" :value="formattedFromDate" disabled></v-text-field>
           <v-date-picker v-model="fromDate"></v-date-picker>
         </v-menu>
         <v-spacer></v-spacer>
-        <v-menu bottom left>
+        <v-menu>
           <v-text-field slot="activator" label="To Date" prepend-icon="date_range" :value="formattedToDate" disabled></v-text-field>
           <v-date-picker v-model="toDate"></v-date-picker>
         </v-menu>
@@ -19,6 +19,9 @@
         </v-card>
         <v-card class="resultError" v-for="error in errors" :key="error.message" v-if="!isSuccess">
           <div>{{error.message}}</div>
+        </v-card>
+        <v-card class="resultSuccess" v-if="emptyResult">
+          <div>No results found for date range</div>
         </v-card>
       </v-flex>
     </v-layout>
@@ -36,7 +39,8 @@
       toDate : null,
       messages : [],
       errors : [],
-      isSuccess: true
+      isSuccess: true,
+      emptyResult : false
     }),
     methods: {
       // `this` inside methods points to the Vue instance
@@ -48,6 +52,7 @@
               this.isSuccess = data.isSuccess            
               this.messages = data.smsMessages
               this.errors = data.errorMessages
+              this.emptyResult = (data.smsMessages.length == 0 && data.isSuccess) ? true : false
               console.log('Success')
               console.log(data) // Prints result from `response.json()` in getRequest // for development only
             })
